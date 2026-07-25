@@ -1,5 +1,4 @@
 export default async function handler(req, res) {
-  // POST 요청만 허용
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
@@ -30,8 +29,9 @@ export default async function handler(req, res) {
 4. 한국어로 작성하며 마크다운 형식을 적절히 사용할 것.`;
 
   try {
+    // gemini-2.0-flash / v1beta 엔드포인트 적용
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
       {
         method: 'POST',
         headers: {
