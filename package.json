@@ -6,6 +6,9 @@
   "scripts": {
     "start": "vercel dev"
   },
+  "dependencies": {
+    "@google/genai": "^0.1.1"
+  },
   "keywords": ["gemini", "todo", "gothic", "vercel"],
   "author": "Hwang Yuri",
   "license": "MIT"
