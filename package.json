@@ -1,0 +1,12 @@
+{
+  "name": "fear-todo-app",
+  "version": "1.0.0",
+  "description": "미루고 있는 할 일을 입력하면 Gemini가 으스스한 미래 경고장을 발송하는 웹앱",
+  "main": "index.html",
+  "scripts": {
+    "start": "vercel dev"
+  },
+  "keywords": ["gemini", "todo", "gothic", "vercel"],
+  "author": "Hwang Yuri",
+  "license": "MIT"
+}

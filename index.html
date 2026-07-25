@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>안 하면 무서워지는 앱 🩸</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Metal+Mania&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #080507;
+      --card-bg: #120a0e;
+      --accent-red: #dc143c;
+      --deep-red: #660000;
+      --text-color: #e0d8d8;
+      --muted-color: #998888;
+      --font-gothic: 'Gowun Batang', serif;
+      --font-title: 'Metal Mania', cursive, 'Gowun Batang', serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: var(--font-gothic);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background-image: 
+        radial-gradient(circle at 50% 20%, rgba(139, 0, 0, 0.15) 0%, transparent 60%),
+        radial-gradient(circle at 80% 80%, rgba(50, 0, 0, 0.2) 0%, transparent 50%);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 640px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--deep-red);
+      border-radius: 8px;
+      padding: 32px 24px;
+      box-shadow: 0 0 35px rgba(220, 20, 60, 0.15), inset 0 0 15px rgba(0,0,0,0.8);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .container::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--accent-red), transparent);
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    h1 {
+      font-family: var(--font-title);
+      font-size: 2.2rem;
+      color: var(--accent-red);
+      text-shadow: 0 0 10px rgba(220, 20, 60, 0.5);
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      color: var(--muted-color);
+      word-break: keep-all;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    label {
+      font-size: 0.9rem;
+      color: var(--text-color);
+      font-weight: 700;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 14px 16px;
+      background-color: #0a0608;
+      border: 1px solid #3d141d;
+      border-radius: 4px;
+      color: #fff;
+      font-family: var(--font-gothic);
+      font-size: 1rem;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    input[type="text"]:focus {
+      border-color: var(--accent-red);
+      box-shadow: 0 0 10px rgba(220, 20, 60, 0.3);
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(180deg, #990011 0%, #550000 100%);
+      border: 1px solid var(--accent-red);
+      color: #ffffff;
+      font-family: var(--font-gothic);
+      font-size: 1.05rem;
+      font-weight: 700;
+      border-radius: 4px;
+      cursor: pointer;
+      letter-spacing: 1px;
+      transition: all 0.2s ease;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+    }
+
+    button:hover {
+      background: linear-gradient(180deg, #cc0016 0%, #770000 100%);
+      box-shadow: 0 0 15px rgba(220, 20, 60, 0.5);
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .result-box {
+      display: none;
+      margin-top: 24px;
+      padding: 20px;
+      background-color: #080305;
+      border-left: 3px solid var(--accent-red);
+      border-radius: 0 4px 4px 0;
+      line-height: 1.7;
+      font-size: 0.98rem;
+      white-space: pre-wrap;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    .loading {
+      display: none;
+      text-align: center;
+      margin: 20px 0;
+      color: var(--accent-red);
+      font-size: 0.95rem;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    footer {
+      margin-top: 24px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted-color);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>경고: 안 하면 무서워지는 앱</h1>
+      <p class="subtitle">오늘 미루고 있는 할 일을 적어라. 미룬 자에게 찾아올 미래를 보여주마...</p>
+    </header>
+
+    <div class="form-group">
+      <label for="taskInput">🩸 오늘 미루고 있는 할 일</label>
+      <input type="text" id="taskInput" placeholder="예: 운동하기, 보고서 제출, 분리수거하기" autocomplete="off" />
+      <button id="generateBtn" onclick="fetchWarning()">미래 경고장 발급받기</button>
+    </div>
+
+    <div class="loading" id="loading">
+      🕷️ 어둠 속에서 네 잔혹한 미래를 소환하는 중...
+    </div>
+
+    <div class="result-box" id="resultBox"></div>
+  </div>
+
+  <footer>
+    © 2026 안 하면 무서워지는 앱 · Powered by Gemini API
+  </footer>
+
+  <script>
+    async function fetchWarning() {
+      const taskInput = document.getElementById('taskInput');
+      const btn = document.getElementById('generateBtn');
+      const loading = document.getElementById('loading');
+      const resultBox = document.getElementById('resultBox');
+
+      const task = taskInput.value.trim();
+      if (!task) {
+        alert('미루고 있는 할 일을 입력해야 경고장을 작성할 수 있다...');
+        return;
+      }
+
+      btn.disabled = true;
+      loading.style.display = 'block';
+      resultBox.style.display = 'none';
+      resultBox.textContent = '';
+
+      try {
+        const response = await fetch('/api/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ task })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || '경고장을 불러오지 못했습니다.');
+        }
+
+        resultBox.textContent = data.warningLetter;
+        resultBox.style.display = 'block';
+      } catch (err) {
+        alert(err.message);
+      } finally {
+        btn.disabled = false;
+        loading.style.display = 'none';
+      }
+    }
+
+    document.getElementById('taskInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        fetchWarning();
+      }
+    });
+  </script>
+</body>
+</html>
