@@ -29,9 +29,9 @@ export default async function handler(req, res) {
 4. 한국어로 작성하며 마크다운 형식을 적절히 사용할 것.`;
 
   try {
-    // gemini-2.0-flash / v1beta 엔드포인트 적용
+    // 무료 티어 기본 모델인 gemini-1.5-flash / v1 경로 적용
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+      `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
       {
         method: 'POST',
         headers: {
