@@ -1,3 +1,5 @@
+import { GoogleGenAI } from '@google/genai';
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method Not Allowed' });
@@ -29,27 +31,13 @@ export default async function handler(req, res) {
 4. 한국어로 작성하며 마크다운 형식을 적절히 사용할 것.`;
 
   try {
-    // 무료 티어 기본 모델인 gemini-1.5-flash / v1 경로 적용
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }],
-        }),
-      }
-    );
+    const ai = new GoogleGenAI({ apiKey });
+    const response = await ai.models.generateContent({
+      model: 'gemini-2.5-flash',
+      contents: prompt,
+    });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.error?.message || 'Gemini API 호출에 실패했습니다.');
-    }
-
-    const data = await response.json();
-    const resultText = data.candidates?.[0]?.content?.parts?.[0]?.text || '경고장을 작성하는 도중 흑마법에 오차가 생겼습니다.';
+    const resultText = response.text || '경고장을 작성하는 도중 흑마법에 오차가 생겼습니다.';
 
     return res.status(200).json({ warningLetter: resultText });
   } catch (error) {
